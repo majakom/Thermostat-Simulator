@@ -1,0 +1,24 @@
+{
+    "materials": [
+        {
+            "name": "Stainless steel",
+            "Ct": 45
+        }
+        {
+            "name": "Ceramic",
+            "Ct": 30
+        }
+        {
+            "name": "Glass",
+            "Ct": 1.38
+        }
+        {
+            "name": "Copper",
+            "Ct": 401
+        }
+        {
+            "name": "Aluminium",
+            "Ct": 247
+        }
+    ]
+}
