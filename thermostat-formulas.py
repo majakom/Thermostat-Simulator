@@ -50,28 +50,50 @@ def GetAllData(TempAmbMin, TempAmbMax, TempMax, TempMin):
     return newKettle, TempWanted, TempAmb
 
 def Calculate():
+    voltagePID = [0.0] # voltage in PID regulator
+    voltage  = [0.0] # voltage now
+    voltageMin = 0.0 #min voltage possible
+    voltageMax = 240.0 # max voltage possible to use
+
+
     timeSimulation = 4000 #entire time for simulation
     time = [0.0] # time lapse vector
-    timeI = 0.1 # time interval
-    N = int(timeSimulation/timeI) + 1
+    timeInterval = 0.1 # time interval
+    timeI = 2.5
+    timeD = 0.0
+    N = int(timeSimulation/timeInterval) + 1
 
     TempMin = 50 #min temperature to achieve via kettle
     TempMax = 90 #max temperature to achieve via kettle
     TempAmbMin = 10 #min temperature in outside enivironment
     TempAmbMax = 40 #max temperature in outside environment
     
+    Density = [] # density of water
     
-    Kp = 0.02 #regulator gain
+    
     HeatIn = [0.0] #heat created inside kettle
     HeatOut = [0.0] #heat loss to the outside environment
 
+    
+    Kp = 0.02 #regulator gain
+    
     newKettle, TempWanted, TempAmb = GetAllData(TempAmbMin, TempAmbMax, TempMax, TempMin)
 
-    # newKettle.
     TempWater = [TempAmb] # assumption that water temperature is equal to ambient temperature at the start
+    e = [(TempWanted - TempWater[0])] # tilt in the beginning
+    sumE = [e[0]] #sum of tilts
+    ThermalResistance = newKettle.CalculateThermalResistance() #calculate thermal resistance
 
-    # for _ in range(N):
-    #     time.append(t[-1] + timeI)
+    for _ in range(N):
+        time.append((time[-1] + timeInterval))
+        e.append((TempWanted - TempWater[-1]))
+        sumE.append((sumE[-1] + e[-1]))
+        voltagePID.append(Kp*(e[-1] + (timeInterval/timeI)*sumE[-1] + (timeD/timeInterval)*(e[-1]-e[-2])))
+        voltage.append(max(voltageMin, min(voltageMax, voltagePID[-1])))
+
+        Density.append((newKettle.CalculateWaterDensity(TempWater)))
+        ThermalCapcity = newKettle.CalculateThermalCapacity(Density, TempWater)
+        HeatOut.append(newKettle.CalculateHeatLoss(TempWater, TempAmb, ThermalResistance))
 
 
 
