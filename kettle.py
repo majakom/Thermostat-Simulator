@@ -20,8 +20,8 @@ class Kettle:
         Volume = 1.7 #assumption that Volume is constant
         Mass = Density[-1]*Volume
         return Mass*self.CalculateIsochoricSpecificHeat(TempWater)
-    #def CalculateWaterTemperature(self, TempWater, HeatIn, TempAmb, ThermalResistance, ThermalCapacity):
-   #     TempWater.append(TempWater[-1] + /ThermalCapacity)
+    def CalculateWaterTemperature(self, TempWater, HeatIn, TempAmb, ThermalResistance, ThermalCapacity):
+        TempWater.append(TempWater[-1] + /ThermalCapacity)
 
 
 

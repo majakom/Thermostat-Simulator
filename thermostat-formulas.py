@@ -1,5 +1,6 @@
 import json
 import kettle
+import matplotlib.pyplot as plt
 
 global materials
 materials = []
@@ -55,6 +56,11 @@ def Calculate():
     voltageMin = 0.0 #min voltage possible
     voltageMax = 240.0 # max voltage possible to use
 
+    currentMin = 0 #current relays on the value of the voltage
+    currentMax = 13
+    current = [0.0]
+
+    power = [0.0]
 
     timeSimulation = 4000 #entire time for simulation
     time = [0.0] # time lapse vector
@@ -69,8 +75,7 @@ def Calculate():
     TempAmbMax = 40 #max temperature in outside environment
     
     Density = [] # density of water
-    
-    
+
     HeatIn = [0.0] #heat created inside kettle
     HeatOut = [0.0] #heat loss to the outside environment
 
@@ -82,6 +87,9 @@ def Calculate():
     TempWater = [TempAmb] # assumption that water temperature is equal to ambient temperature at the start
     e = [(TempWanted - TempWater[0])] # tilt in the beginning
     sumE = [e[0]] #sum of tilts
+
+    ThermalCapacity = [0.0]
+    SpecificHeat = [0.0]
     ThermalResistance = newKettle.CalculateThermalResistance() #calculate thermal resistance
 
     for _ in range(N):
@@ -90,10 +98,16 @@ def Calculate():
         sumE.append((sumE[-1] + e[-1]))
         voltagePID.append(Kp*(e[-1] + (timeInterval/timeI)*sumE[-1] + (timeD/timeInterval)*(e[-1]-e[-2])))
         voltage.append(max(voltageMin, min(voltageMax, voltagePID[-1])))
+        current.append((currentMax - currentMin)/(voltageMax - voltageMin) * (voltage[-1] - voltageMin) + currentMin)
+        power.append(newKettle.CalculatePower(voltage, current))
 
         Density.append((newKettle.CalculateWaterDensity(TempWater)))
-        ThermalCapcity = newKettle.CalculateThermalCapacity(Density, TempWater)
+        SpecificHeat.append(newKettle.CalculateIsochoricSpecificHeat(TempWater))
+        ThermalCapacity.append(newKettle.CalculateThermalCapacity(Density, SpecificHeat))
         HeatOut.append(newKettle.CalculateHeatLoss(TempWater, TempAmb, ThermalResistance))
+        HeatIn.append(newKettle.CalculateHeatProvided(power, time))
+        TempWater.append(newKettle.CalculateWaterTemperature(TempWater, HeatIn, HeatOut, timeInterval, ThermalCapacity))
+
 
 
 
