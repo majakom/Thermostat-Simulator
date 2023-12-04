@@ -1,40 +1,17 @@
 import json
-Power = [] #power const
-PowerMin #min power
-PowerMax #max power
+import kettle
 
-time = [] #list to keep track of time
-timeSimulation = 4000 #s - time of the simulation
-Ti = 0.1 #min time difference
-N = int(timeSimulation/Ti) + 1 #the amount of the tests
+global materials
+materials = []
 
-TempMax = 90 #max temperature to get from thermostat
-TempMin = 50 #min temperature to get from thermostat
-TempAmbMin = 7 #min temperature to use thermostat in
-TempAmbMax = 40 #max temperature to use thermostat in
-TempAmb #ambient temperature - const
-TempWanted #temperature you want to achieve
-TempWater = [] #water temperature
-
-Kp = 0.02 #regulator gain
+def LoadJson():
+    with open("material.json", "r") as dataFile:
+        data = json.load(dataFile)
+    for material in data["materials"]:
+        materials.append(kettle.Kettle(material["name"], material["ThermalConductivity"], material["thickness"], 0.126))
 
 
-U_min # min voltage
-U_max #max voltage
-
-
-qt = [] #heat provided by the heater
-q0 = [] #heat loss to the environment
-h #fabric thickness
-lambd #thermal conductivity depending on the fabric
-m #mass of the fabric
-Rt = h/lambd #thermal conductivity
-U #voltage
-I #current const
-
-
-
-def GetAllData(TempAmbMin, TempAmbMax):
+def GetAllData(TempAmbMin, TempAmbMax, TempMax, TempMin):
     print("Enter the value of ambient temperature in Celcius (assuming it is a constant):")
     TempAmb = float(input())
     while(TempAmbMin>=TempAmb and TempAmb>=TempAmbMax){
@@ -59,17 +36,49 @@ def GetAllData(TempAmbMin, TempAmbMax):
 
     print("Choose the material of the thermostat:")
     print("(0) Stainless steel")
-    print("(1) Ceramic")
-    print("(2) Glass")
-    print("(3) Copper")
-    print("(4) Aluminium")
+    print("(1) Glass")
+    print("(2) Copper")
+    print("(3) Aluminium")
     choice = int(input())
     match choice:
         case 0:
-            
+            newKettle = materials[0]
+        case 1:
+            newKettle = materials[1]
+        case 2:
+            newKettle = materials[2]
+        case 3:
+            newKettle = materials[3]
 
+    return newKettle, TempWanted, TempAmb
 
+def Calculate():
+    timeSimulation = 4000 #entire time for simulation
+    time = [0.0] # time lapse vector
+    timeI = 0.1 # time interval
+    N = int(timeSimulation/timeI) + 1
+
+    TempMin = 50 #min temperature to achieve via kettle
+    TempMax = 90 #max temperature to achieve via kettle
+    TempAmbMin = 10 #min temperature in outside enivironment
+    TempAmbMax = 40 #max temperature in outside environment
     
+    
+    Kp = 0.02 #regulator gain
+    HeatIn = [0.0] #heat created inside kettle
+    HeatOut = [0.0] #heat loss to the outside environment
+
+    newKettle, TempWanted, TempAmb = GetAllData(TempAmbMin, TempAmbMax, TempMax, TempMin)
+
+    TempWater = [TempAmb] # assumption that water temperature is equal to ambient temperature at the start
+
+    for _ in range(N):
+        time.append(t[-1] + timeI)
+        
+
+
+
+LoadJson()
 
 
 
