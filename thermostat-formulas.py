@@ -10,26 +10,24 @@ def LoadJson():
         data = json.load(dataFile)
     for material in data["materials"]:
         materials.append(kettle.Kettle(material["name"], material["ThermalConductivity"], material["thickness"], 0.126))
-LoadJson()
-print(type(materials[0].material))
 
 def GetAllData(TempAmbMin, TempAmbMax, TempMax, TempMin):
     print("Enter the value of ambient temperature in Celcius (assuming it is a constant):")
     TempAmb = float(input())
-    while(TempAmbMin>=TempAmb and TempAmb>=TempAmbMax):
-        if(TempAmbMin>=TempAmb):
-            print("Chosen temperature is too low. Min value = 7 C. Try again:")
-        elif (TempAmb>=TempAmbMax):
+    while(TempAmbMin>TempAmb or TempAmb>TempAmbMax):
+        if(TempAmbMin>TempAmb):
+            print("Chosen temperature is too low. Min value = 10 C. Try again:")
+        elif (TempAmb>TempAmbMax):
             print("Chosen temperature is too high. Max value = 40 C. Try again:")
         TempAmb = float(input())
 
     print("Enter the value of wanted temperature of water in Celcius:")
     TempWanted = float(input())  
-    while(TempMin>=TempWanted and TempWanted>=TempMax):
-        if(TempMin>=TempWanted):
-            print("Chosen temperature is too low. Min value = 7 C. Try again:")
-        elif (TempWanted>=TempMax):
-            print("Chosen temperature is too high. Max value = 40 C. Try again:")
+    while(TempMin>TempWanted or TempWanted>TempMax):
+        if(TempMin>TempWanted):
+            print("Chosen temperature is too low. Min value = 50 C. Try again:")
+        elif (TempWanted>TempMax):
+            print("Chosen temperature is too high. Max value = 90 C. Try again:")
         TempWanted = float(input())
 
     print("Choose the material of the thermostat:")
@@ -62,11 +60,11 @@ def Calculate():
 
     power = [0.0]
 
-    timeSimulation = 4000 #entire time for simulation
+    timeSimulation = 20000 #entire time for simulation
     time = [0.0] # time lapse vector
     timeInterval = 0.1 # time interval
     timeI = 2.5
-    timeD = 0.0
+    timeD = 2.0
     N = int(timeSimulation/timeInterval) + 1
 
     TempMin = 50 #min temperature to achieve via kettle
@@ -80,7 +78,7 @@ def Calculate():
     HeatOut = [0.0] #heat loss to the outside environment
 
     
-    Kp = 0.02 #regulator gain
+    Kp = 0.0009 #regulator gain
     
     newKettle, TempWanted, TempAmb = GetAllData(TempAmbMin, TempAmbMax, TempMax, TempMin)
 
@@ -99,7 +97,7 @@ def Calculate():
         voltagePID.append(Kp*(e[-1] + (timeInterval/timeI)*sumE[-1] + (timeD/timeInterval)*(e[-1]-e[-2])))
         voltage.append(max(voltageMin, min(voltageMax, voltagePID[-1])))
         current.append((currentMax - currentMin)/(voltageMax - voltageMin) * (voltage[-1] - voltageMin) + currentMin)
-        power.append(newKettle.CalculatePower(voltage, current))
+        power.append(newKettle.CalculatePower(voltage,current))
 
         Density.append((newKettle.CalculateWaterDensity(TempWater)))
         SpecificHeat.append(newKettle.CalculateIsochoricSpecificHeat(TempWater))
@@ -108,6 +106,14 @@ def Calculate():
         HeatIn.append(newKettle.CalculateHeatProvided(power, time))
         TempWater.append(newKettle.CalculateWaterTemperature(TempWater, HeatIn, HeatOut, timeInterval, ThermalCapacity))
 
+    fig = plt.figure()
+    gs = fig.add_gridspec(2, hspace=0.5)
+    axs = gs.subplots()
+    axs[0].plot(time, TempWater)
+    axs[1].plot(time, ThermalCapacity)
+    plt.legend()
+    plt.legend()
+    plt.show(block=True)
 
 
 
