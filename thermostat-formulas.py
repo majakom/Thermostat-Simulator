@@ -9,30 +9,27 @@ def LoadJson():
         data = json.load(dataFile)
     for material in data["materials"]:
         materials.append(kettle.Kettle(material["name"], material["ThermalConductivity"], material["thickness"], 0.126))
-
+LoadJson()
+print(type(materials[0].material))
 
 def GetAllData(TempAmbMin, TempAmbMax, TempMax, TempMin):
     print("Enter the value of ambient temperature in Celcius (assuming it is a constant):")
     TempAmb = float(input())
-    while(TempAmbMin>=TempAmb and TempAmb>=TempAmbMax){
-        if(TempAmbMin>=TempAmb){
+    while(TempAmbMin>=TempAmb and TempAmb>=TempAmbMax):
+        if(TempAmbMin>=TempAmb):
             print("Chosen temperature is too low. Min value = 7 C. Try again:")
-        } elif (TempAmb>=TempAmbMax) {
+        elif (TempAmb>=TempAmbMax):
             print("Chosen temperature is too high. Max value = 40 C. Try again:")
-        }
         TempAmb = float(input())
-    }
 
     print("Enter the value of wanted temperature of water in Celcius:")
     TempWanted = float(input())  
-    while(TempMin>=TempWanted and TempWanted>=TempMax){
-        if(TempMin>=TempWanted){
+    while(TempMin>=TempWanted and TempWanted>=TempMax):
+        if(TempMin>=TempWanted):
             print("Chosen temperature is too low. Min value = 7 C. Try again:")
-        } elif (TempWanted>=TempMax) {
+        elif (TempWanted>=TempMax):
             print("Chosen temperature is too high. Max value = 40 C. Try again:")
-        }
         TempWanted = float(input())
-    }
 
     print("Choose the material of the thermostat:")
     print("(0) Stainless steel")
@@ -70,15 +67,17 @@ def Calculate():
 
     newKettle, TempWanted, TempAmb = GetAllData(TempAmbMin, TempAmbMax, TempMax, TempMin)
 
+    # newKettle.
     TempWater = [TempAmb] # assumption that water temperature is equal to ambient temperature at the start
 
-    for _ in range(N):
-        time.append(t[-1] + timeI)
-        
+    # for _ in range(N):
+    #     time.append(t[-1] + timeI)
+
 
 
 
 LoadJson()
+Calculate()
 
 
 
