@@ -2,23 +2,23 @@
     "materials": [
         {
             "name": "Stainless steel",
-            "Ct": 45
-        }
+            "ThermalConductivity": 26,
+            "thickness": 0.0008
+        },
         {
-            "name": "Ceramic",
-            "Ct": 30
-        }
-        {
-            "name": "Glass",
-            "Ct": 1.38
-        }
+            "name": "Borosilicate glass",
+            "ThermalConductivity": 1.2,
+            "thickness": 0.003
+        },
         {
             "name": "Copper",
-            "Ct": 401
-        }
+            "ThermalConductivity": 398,
+            "thickness": 0.0015
+        },
         {
-            "name": "Aluminium",
-            "Ct": 247
+            "name": "Aluminum",
+            "ThermalConductivity": 247,
+            "thickness": 0.0015
         }
     ]
 }
