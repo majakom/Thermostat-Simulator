@@ -1,6 +1,10 @@
-from flask import Flask
-#import thermostat_formulas
-app = Flask(__name__)
+from flask import Flask, render_template
+
+app = Flask(__name__, template_folder='html_files')
 @app.route("/")
-def home():
-    return "h"
+@app.route("/flaskApp")
+def flaskApp():
+    return render_template('flaskApp.html')
+
+if __name__ == '__main__':  
+   app.run(debug=True)
