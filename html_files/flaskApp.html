@@ -8,7 +8,39 @@
         <link rel="stylesheet" href="..\\static\\style.css">
     </head>
     <body>
+        <h1>Thermostat Simulator</h1>
         <br>
-        <b>rghveryub4wbytvq</b>
+        <div class="Select Material">
+            <div id="idTemp" class="label">
+                Choose material:
+            </div>
+            <div class="custom-select" style="width:200px;">
+                <select>
+                  <option value="1"><b>Stainless steel</b></option>
+                  <option value="2"><b>Borosilicate glass</b></option>
+                  <option value="3"><b>Copper</b></option>
+                  <option value="4"><b>Aluminum</b></option>
+                </select>
+        </div>
+        <br>
+        <br>
+        <div class="Select Ambient Temperature">
+            <div id="idTemp" class="label">
+                Select ambient temperature:
+            </div>
+            <div>
+                <input type="range" id="idTemp" name="idTemp" min="10" max="40"/>
+
+            </div>            
+        </div>
+        <div class="Select Temperature">
+            <div id="idTemp" class="label">
+                Select temperature:
+            </div>
+            <div>
+                <input type="range" id="idTemp" name="idTemp" min="50" max="90"/>
+                
+            </div>            
+        </div>
     </body>
 </html>

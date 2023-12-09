@@ -1,4 +1,9 @@
+html {
+    letter-spacing: 1px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 body {
     background-color: rgb(47, 58, 58);
     color: white;
+    margin: 0 auto;
 }
