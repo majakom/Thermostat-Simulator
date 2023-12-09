@@ -7,3 +7,13 @@ body {
     color: white;
     margin: 0 auto;
 }
+h1 {
+    margin: 30px;
+    margin-top: 50px;
+}
+.Select_Ambient_Temperature{
+    margin: 30 px;
+}
+.Temp{
+    margin: 30 px;
+}

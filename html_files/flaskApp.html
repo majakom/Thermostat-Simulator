@@ -10,37 +10,51 @@
     <body>
         <h1>Thermostat Simulator</h1>
         <br>
-        <div class="Select Material">
+        <div class="Select_Material">
             <div id="idTemp" class="label">
                 Choose material:
             </div>
+            <br>
             <div class="custom-select" style="width:200px;">
                 <select>
-                  <option value="1"><b>Stainless steel</b></option>
-                  <option value="2"><b>Borosilicate glass</b></option>
-                  <option value="3"><b>Copper</b></option>
-                  <option value="4"><b>Aluminum</b></option>
+                    <option value="1"><b>Stainless steel</b></option>
+                    <option value="2"><b>Borosilicate glass</b></option>
+                    <option value="3"><b>Copper</b></option>
+                    <option value="4"><b>Aluminum</b></option>
                 </select>
-        </div>
-        <br>
-        <br>
-        <div class="Select Ambient Temperature">
-            <div id="idTemp" class="label">
-                Select ambient temperature:
             </div>
-            <div>
-                <input type="range" id="idTemp" name="idTemp" min="10" max="40"/>
+            <br>
+            <br>
+            <div class="Select_Ambient_Temperature">
+                <div id="idTemp" class="AmbientTemp">
+                    Select ambient temperature:
+                </div>
+                <br>
+                <div>
+                    <input type="range" id="ambientSlider" name="ambientSlider" min="10" max="40" step="1" oninput="updateValue('ambientSlider', 'ambientValue')"/>
+                    <output id="ambientValue">25</output>
+                </div>            
+            </div>
+            <br>
+            <br>
+            <div class="Select_Temperature">
+                <div id="idTemp" class="Temp">
+                    Select temperature:
+                </div>
+                <br>
+                <div>
+                    <input type="range" id="temperatureSlider" name="idTemp" min="50" max="90" step="1"  oninput="updateValue('temperatureSlider', 'temperatureValue')"/>
+                    <output id="temperatureValue">70</output>
+                </div> 
+            </div>           
+        </div>
 
-            </div>            
-        </div>
-        <div class="Select Temperature">
-            <div id="idTemp" class="label">
-                Select temperature:
-            </div>
-            <div>
-                <input type="range" id="idTemp" name="idTemp" min="50" max="90"/>
-                
-            </div>            
-        </div>
+        <script>
+            function updateValue(sliderId, outputId) {
+                var slider = document.getElementById(sliderId);
+                var output = document.getElementById(outputId);
+                output.textContent = slider.value;
+            }
+        </script>
     </body>
 </html>
