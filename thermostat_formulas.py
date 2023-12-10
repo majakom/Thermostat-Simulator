@@ -48,6 +48,16 @@ def GetAllData(TempAmbMin, TempAmbMax, TempMax, TempMin):
 
     return newKettle, TempWanted, TempAmb
 
+
+def GetDataFromFlask(data):
+    try:
+        for i in range(len(data)):
+            print(data[i])
+    except:
+        print("Error")
+
+
+
 def Calculate():
     voltagePID = [0.0] # voltage in PID regulator
     voltage  = [0.0] # voltage now
@@ -117,8 +127,8 @@ def Calculate():
 
 
 
-LoadJson()
-Calculate()
+#LoadJson()
+#Calculate()
 
 
 
