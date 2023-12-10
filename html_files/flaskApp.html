@@ -10,51 +10,62 @@
     <body>
         <h1>Thermostat Simulator</h1>
         <br>
+        <form action="/GetParameters" method="post" id="getData" class="GetDataClass">
         <div class="Select_Material">
-            <div id="idTemp" class="label">
-                Choose material:
+            <label for="ChooseMaterial">Choose material:</label>
             </div>
             <br>
-            <div class="custom-select" style="width:200px;">
-                <select>
-                    <option value="1"><b>Stainless steel</b></option>
-                    <option value="2"><b>Borosilicate glass</b></option>
-                    <option value="3"><b>Copper</b></option>
-                    <option value="4"><b>Aluminum</b></option>
+            <div class="select">
+                <select id="selectMaterial" name="typeMaterial" onchange="GetMaterial('selectMaterial', 'materialSelect')">
+                    <option value="Stainless steel"><b>Stainless steel</b></option>
+                    <option value="Borosilicate glass"><b>Borosilicate glass</b></option>
+                    <option value="Copper"><b>Copper</b></option>
+                    <option value="Aluminum"><b>Aluminum</b></option>
                 </select>
+                <output id="materialSelect">Stainless steel</output>
             </div>
-            <br>
-            <br>
-            <div class="Select_Ambient_Temperature">
-                <div id="idTemp" class="AmbientTemp">
-                    Select ambient temperature:
-                </div>
-                <br>
-                <div>
-                    <input type="range" id="ambientSlider" name="ambientSlider" min="10" max="40" step="1" oninput="updateValue('ambientSlider', 'ambientValue')"/>
-                    <output id="ambientValue">25</output>
-                </div>            
-            </div>
-            <br>
-            <br>
-            <div class="Select_Temperature">
-                <div id="idTemp" class="Temp">
-                    Select temperature:
-                </div>
-                <br>
-                <div>
-                    <input type="range" id="temperatureSlider" name="idTemp" min="50" max="90" step="1"  oninput="updateValue('temperatureSlider', 'temperatureValue')"/>
-                    <output id="temperatureValue">70</output>
-                </div> 
-            </div>           
         </div>
-
-        <script>
-            function updateValue(sliderId, outputId) {
-                var slider = document.getElementById(sliderId);
-                var output = document.getElementById(outputId);
-                output.textContent = slider.value;
-            }
-        </script>
+        <br>
+        <br>
+        <div class="Select_Ambient_Temperature">
+            <label for="ChooseAmbientTemperature">Select ambient temperature:</label>
+                <br>
+                <div>
+                    <input type="range" id="ambientSlider" name="AmbientTemperature" min="10" max="40" step="1" oninput="updateValue('ambientSlider', 'ambientValue')"/>
+                    <output id="ambientValue">25</output> [°C]
+                </div>            
+        </div>
+        <br>
+        <br>
+        <div class="Select_Temperature">
+            <label for="ChooseTemperature">Select temperature:</label>
+            <br>
+            <div>
+                <input type="range" id="temperatureSlider" name="Temperature" min="50" max="90" step="1"  oninput="updateValue('temperatureSlider', 'temperatureValue')"/>
+                <output id="temperatureValue">70</output> [°C]
+            </div> 
+        </div>    
+        <br>
+        <br>
+        <div class="Button">
+            <form action="/GetParameters" method="post">
+                <button type="submit">Create charts</button>
+            </form>
+        </div>
+        </form>       
     </body>
+    <script>
+        function updateValue(sliderId, outputId) {
+            var slider = document.getElementById(sliderId);
+            var output = document.getElementById(outputId);
+            output.textContent = slider.value;
+        }
+        function GetMaterial(selectId, outputId) {
+            const selectElement = document.getElementById(selectId);
+            const output = document.getElementById(outputId);
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            output.textContent = selectedOption.text;
+        }
+        
+    </script>
 </html>
