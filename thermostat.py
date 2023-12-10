@@ -12,11 +12,13 @@ def GetParameters():
     material = request.form.get("typeMaterial")
     ambient = request.form.get("AmbientTemperature")
     temperature = request.form.get("Temperature")
-    data = [material, ambient, temperature]
-    main.GetDataFromFlask(data)
+    data = [int(material), int(ambient), int(temperature)]
+    main.LoadJson()
+    main.Calculate(data)
+    
     print(f"Material: {material}, Ambient: {ambient}, Temperature: {temperature}")
     
-    return jsonify(data)
+    return render_template('flaskApp.html')
 
 if __name__ == '__main__':  
    app.run(debug=True)

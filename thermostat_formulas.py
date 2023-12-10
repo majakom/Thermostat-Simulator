@@ -1,12 +1,14 @@
 import json
 import kettle
 import matplotlib.pyplot as plt
-
+import os
 global materials
 materials = []
 
 def LoadJson():
-    with open("material.json", "r") as dataFile:
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    file_path = os.path.join(script_dir, "material.json")
+    with open(file_path, "r") as dataFile:
         data = json.load(dataFile)
     for material in data["materials"]:
         materials.append(kettle.Kettle(material["name"], material["ThermalConductivity"], material["thickness"], 0.126))
@@ -50,15 +52,21 @@ def GetAllData(TempAmbMin, TempAmbMax, TempMax, TempMin):
 
 
 def GetDataFromFlask(data):
-    try:
-        for i in range(len(data)):
-            print(data[i])
-    except:
-        print("Error")
+    choice = data[0]
+    match choice:
+        case 0:
+            newKettle = materials[0]
+        case 1:
+            newKettle = materials[1]
+        case 2:
+            newKettle = materials[2]
+        case 3:
+            newKettle = materials[3]
+    return newKettle, data[2], data[1]
 
 
 
-def Calculate():
+def Calculate(data):
     voltagePID = [0.0] # voltage in PID regulator
     voltage  = [0.0] # voltage now
     voltageMin = 0.0 #min voltage possible
@@ -90,7 +98,9 @@ def Calculate():
     
     Kp = 0.0009 #regulator gain
     
-    newKettle, TempWanted, TempAmb = GetAllData(TempAmbMin, TempAmbMax, TempMax, TempMin)
+    newKettle, TempWanted, TempAmb =  GetDataFromFlask(data)
+
+    # GetAllData(TempAmbMin, TempAmbMax, TempMax, TempMin)
 
     TempWater = [TempAmb] # assumption that water temperature is equal to ambient temperature at the start
     e = [(TempWanted - TempWater[0])] # tilt in the beginning
