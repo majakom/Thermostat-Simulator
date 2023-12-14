@@ -1,7 +1,9 @@
 import json
 import kettle
 import matplotlib.pyplot as plt
+import pandas as pd
 import os
+import plotly.express as px
 global materials
 materials = []
 
@@ -133,6 +135,14 @@ def Calculate(data):
     plt.legend()
     plt.legend()
     plt.show(block=True)
+
+
+    df = pd.DataFrame({'x_data':time, 'y_data':TempWater})
+
+    fig =px.line(df, x='x_data', y='y_data', title="Testing")
+    fig.show()
+
+    return time, TempWater
 
 
 
