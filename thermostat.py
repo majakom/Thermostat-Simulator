@@ -18,15 +18,14 @@ def GetParameters():
     temperature = request.form.get("Temperature")
     data = [int(material), int(ambient), int(temperature)]
     main.LoadJson()
+    print(f"Material: {material}, Ambient: {ambient}, Temperature: {temperature}")
+
     time, TempWater = main.Calculate(data)
     df = pd.DataFrame({'x_data':time, 'y_data':TempWater})
-
     fig =px.line(df, x='x_data', y='y_data', title="Testing")
-    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    fig.write_html("ThermostatSimulator/html_files/graphApp.html")
-    print(f"Material: {material}, Ambient: {ambient}, Temperature: {temperature}")
     
-    return render_template('result.html')
+    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    return render_template("flaskApp.html", graphJSON=graphJSON)
 
 
 

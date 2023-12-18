@@ -9,7 +9,6 @@
     </head>
     <body>
         <h1>Thermostat Simulator</h1>
-        <h1><a href="graph">Generate Graph</a></h1>
         <br>
         <form action="/GetParameters" method="post" id="getData" class="GetDataClass">
         <div class="Select_Material">
@@ -53,9 +52,16 @@
                 <button type="submit">Create charts</button>
             </form>
         </div>
+        <div id='chart' class='graph'></div>
         </form>
 
     </body>
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <script type='text/javascript'>
+      var graphs = {{graphJSON | safe}};
+      Plotly.plot('chart',graphs,{});
+    </script>
+ 
     <script>
         function updateValue(sliderId, outputId) {
             var slider = document.getElementById(sliderId);
