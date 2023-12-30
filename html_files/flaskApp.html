@@ -10,9 +10,10 @@
     <body>
         <h1>Thermostat Simulator</h1>
         <br>
-        <form action="/GetParameters" method="post" id="getData" class="GetDataClass">
-        <div class="Select_Material">
-            <label for="ChooseMaterial">Choose material:</label>
+        <h2>
+            <form action="/GetParameters" method="post" id="getData" class="GetDataClass">
+            <div class="Select_Material">
+                <label for="ChooseMaterial">Choose material:</label>
             </div>
             <br>
             <div class="select">
@@ -24,36 +25,38 @@
                 </select>
                 <output id="materialSelect">Stainless steel</output>
             </div>
-        </div>
-        <br>
-        <br>
-        <div class="Select_Ambient_Temperature">
-            <label for="ChooseAmbientTemperature">Select ambient temperature:</label>
+            <br>
+            <br>
+            <div class="Select_Ambient_Temperature">
+                <label for="ChooseAmbientTemperature">Select ambient temperature:</label>
                 <br>
                 <div>
                     <input type="range" id="ambientSlider" name="AmbientTemperature" min="10" max="40" step="1" oninput="updateValue('ambientSlider', 'ambientValue')"/>
                     <output id="ambientValue">25</output> [°C]
                 </div>            
-        </div>
-        <br>
-        <br>
-        <div class="Select_Temperature">
-            <label for="ChooseTemperature">Select temperature:</label>
+            </div>
             <br>
-            <div>
-                <input type="range" id="temperatureSlider" name="Temperature" min="50" max="90" step="1"  oninput="updateValue('temperatureSlider', 'temperatureValue')"/>
-                <output id="temperatureValue">70</output> [°C]
-            </div> 
-        </div>    
-        <br>
-        <br>
-        <div class="Button">
-            <form action="/GetParameters" method="post">
-                <button type="submit">Create charts</button>
+            <br>
+            <div class="Select_Temperature">
+                <label for="ChooseTemperature">Select temperature:</label>
+                <br>
+                <div>
+                    <input type="range" id="temperatureSlider" name="Temperature" min="50" max="90" step="1"  oninput="updateValue('temperatureSlider', 'temperatureValue')"/>
+                    <output id="temperatureValue">70</output> [°C]
+                </div> 
+            </div>    
+            <br>
+            <br>
+            <div class="Button">
+                <form action="/GetParameters" method="post">
+                    <button type="submit"></button>
+                    Create charts
+                </form>
+            </div>
+            </h2>
+            <div id='chart' class='graph'></div>
             </form>
-        </div>
-        <div id='chart' class='graph'></div>
-        </form>
+        
 
     </body>
     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>

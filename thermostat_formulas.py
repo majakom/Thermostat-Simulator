@@ -128,27 +128,24 @@ def Calculate(data):
         HeatIn.append(newKettle.CalculateHeatProvided(power, time))
         TempWater.append(newKettle.CalculateWaterTemperature(TempWater, HeatIn, HeatOut, timeInterval, ThermalCapacity))
 
-    fig = plt.figure()
-    gs = fig.add_gridspec(1, hspace=0.5)
-    axs = gs.subplots()
-    axs.plot(time, TempWater)
-    plt.legend()
-    plt.legend()
-    plt.show(block=True)
+    #fig = plt.figure()
+    #gs = fig.add_gridspec(1, hspace=0.5)
+    #axs = gs.subplots()
+    #axs.plot(time, TempWater)
+    #plt.legend()
+    #plt.legend()
+    #plt.show(block=True)
 
 
-    df = pd.DataFrame({'x_data':time, 'y_data':TempWater})
+    #df = pd.DataFrame({'Time [s]':time, 'Water temperature [C]':TempWater})
 
-    fig =px.line(df, x='x_data', y='y_data', title="Testing")
-    fig.show()
+    #fig =px.line(df, x='Time [s]', y='Water temperature [C]', title="Testing")
+    #fig.show()
 
     return time, TempWater
 
 
 
-
-#LoadJson()
-#Calculate()
 
 
 

@@ -1,19 +1,33 @@
 html {
     letter-spacing: 1px;
+    margin: 500 px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 body {
     background-color: rgb(47, 58, 58);
     color: white;
-    margin: 0 auto;
+    margin: 500 px;
+    padding-left: 500 px;
 }
 h1 {
-    margin: 30px;
+    align-items: center;
+    margin-left: 150px;
     margin-top: 50px;
+}
+h2 {
+  font-size: medium;
+  align-items: center;
+  margin-left: 190px;
+  margin-top: 50px;
+}
+h3 {
+  margin-left: 400px;
+  margin-right: 50px;
 }
 
 
 .Button {
+  text-indent: -9999 px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   align-items: center;
   appearance: none;
@@ -34,8 +48,7 @@ h1 {
   padding-left: 16px;
   padding-right: 16px;
   position: relative;
-  text-align: left;
-  text-decoration: none;
+
   transition: box-shadow .15s,transform .15s;
   user-select: none;
   -webkit-user-select: none;
@@ -58,4 +71,6 @@ h1 {
   box-shadow: #7cd5f0 0 3px 7px inset;
   transform: translateY(2px);
 }
+
+
 

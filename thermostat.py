@@ -21,8 +21,8 @@ def GetParameters():
     print(f"Material: {material}, Ambient: {ambient}, Temperature: {temperature}")
 
     time, TempWater = main.Calculate(data)
-    df = pd.DataFrame({'x_data':time, 'y_data':TempWater})
-    fig =px.line(df, x='x_data', y='y_data', title="Testing")
+    df = pd.DataFrame({'Time [s]':time, 'Water temperature [C]':TempWater})
+    fig =px.line(df, x='Time [s]', y='Water temperature [C]', title="Thermostat - PID regulator")
     
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return render_template("flaskApp.html", graphJSON=graphJSON)
