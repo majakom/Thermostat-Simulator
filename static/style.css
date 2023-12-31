@@ -10,20 +10,31 @@ body {
     padding-left: 500 px;
 }
 h1 {
+    background-color: lightblue;
+    text-align: center;
     align-items: center;
-    margin-left: 150px;
-    margin-top: 50px;
 }
 h2 {
   font-size: medium;
   align-items: center;
-  margin-left: 190px;
+  margin-left: 150px;
   margin-top: 50px;
 }
 h3 {
-  margin-left: 400px;
-  margin-right: 50px;
+  align-items: center;
+  margin-left: 600px;
+  margin-right: 80px;
+  margin-bottom: 200px;
+  margin-top: 10px;
 }
+.chart{
+  margin-top: 50px;
+}
+
+.column {
+  float:left;
+}
+
 
 
 .Button {

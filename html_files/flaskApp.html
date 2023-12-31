@@ -8,10 +8,16 @@
         <link rel="stylesheet" href="..\\static\\style.css">
     </head>
     <body>
-        <h1>Thermostat Simulator</h1>
+        <h1>
         <br>
+        Thermostat Simulator
+        <br>
+        <br>
+        </h1>
+        <br>
+        <div>
         <h2>
-            <form action="/GetParameters" method="post" id="getData" class="GetDataClass">
+            <form action="/GetParameters" method="post" id="getData" class="column GetDataClass">
             <div class="Select_Material">
                 <label for="ChooseMaterial">Choose material:</label>
             </div>
@@ -49,15 +55,15 @@
             <br>
             <div class="Button">
                 <form action="/GetParameters" method="post">
-                    <button type="submit"></button>
-                    Create charts
+                    <button type="submit">Create charts</button>                    
                 </form>
             </div>
-            </h2>
-            <div id='chart' class='graph'></div>
-            </form>
-        
-
+            </form>      
+        </h2>
+        </div> 
+        <div style="width:100%">
+            <h3><div id='chart' class='graph'></div></h3>
+        </div>
     </body>
     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
     <script type='text/javascript'>
