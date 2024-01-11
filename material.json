@@ -7,7 +7,7 @@
         },
         {
             "name": "Borosilicate glass",
-            "ThermalConductivity": 1.2,
+            "ThermalConductivity": 211,
             "thickness": 0.003
         },
         {

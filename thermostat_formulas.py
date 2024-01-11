@@ -83,8 +83,7 @@ def Calculate(data):
     timeSimulation = 20000 #entire time for simulation
     time = [0.0] # time lapse vector
     timeInterval = 0.1 # time interval
-    timeI = 2.5
-    timeD = 2.0
+
     N = int(timeSimulation/timeInterval) + 1
 
     TempMin = 50 #min temperature to achieve via kettle
@@ -98,9 +97,26 @@ def Calculate(data):
     HeatOut = [0.0] #heat loss to the outside environment
 
     
-    Kp = 0.0009 #regulator gain
+    Kp = 0.0001 #regulator gain
     
     newKettle, TempWanted, TempAmb =  GetDataFromFlask(data)
+
+    if (newKettle == materials[0]):
+        Kp = 0.0000005999 #regulator gain
+        timeI = 0.0005
+        timeD = 0.000001
+    elif (newKettle == materials[1]):
+        Kp = 0.00000999999999 #regulator gain
+        timeI = 0.0099
+        timeD = 4    
+    elif (newKettle == materials[2]):
+        Kp = 0.000105 #regulator gain
+        timeI = 0.00859
+        timeD = 3
+    elif (newKettle == materials[3]):
+        Kp = 0.01 #regulator gain
+        timeI = 1.5
+        timeD = 10
 
     # GetAllData(TempAmbMin, TempAmbMax, TempMax, TempMin)
 
