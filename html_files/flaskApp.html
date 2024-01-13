@@ -33,6 +33,18 @@
             </div>
             <br>
             <br>
+            <div class="select_Regulator">
+                Choose a regulator:
+                <br>
+                <br>
+                <select id="selectRegulator" name="typeRegulator" onchange="GetMaterial('selectRegulator', 'RegulatorSelect')">
+                    <option value="0"><b>PID</b></option>
+                    <option value="1"><b>PI</b></option>
+                </select>
+                <output id="RegulatorSelect">PID</output> regulator
+            </div>
+            <br>
+            <br>
             <div class="Select_Ambient_Temperature">
                 <label for="ChooseAmbientTemperature">Select ambient temperature:</label>
                 <br>
@@ -51,6 +63,47 @@
                     <output id="temperatureValue">70</output> [°C]
                 </div> 
             </div>    
+            <br>
+            <br>
+            <div class="Select_Kp">
+                <label for="ChooseKp">Select value of Kp:</label>
+                <br>
+                <div>
+                    <input type="range" id="kpSlider" name="Kp" min="0.000001" max="9000" step="0.000001"  oninput="updateValue('kpSlider', 'kpValue')"/>
+                    <output id="kpValue">4500.1</output>
+                </div> 
+            </div>  
+            <br>
+            <br>
+            <div class="Select_Ti">
+                <label for="ChooseTi">Select value of Ti:</label>
+                <br>
+                <div>
+                    <input type="range" id="TiSlider" name="Ti" min="0.1" max="100" step="0.1"  oninput="updateValue('TiSlider', 'TiValue')"/>
+                    <output id="TiValue">50.1</output> [s]
+                </div> 
+            </div>  
+            <br>
+            <br>
+            <div class="Select_Td">
+                <label for="ChooseTd">Select value of Td:</label>
+                <br>
+                <div>
+                    <input type="range" id="TdSlider" name="Td" min="0.1" max="100" step="0.1"  oninput="updateValue('TdSlider', 'TdValue')"/>
+                    <output id="TdValue">50.1</output> [s]
+                </div> 
+            </div>  
+            <br>
+            <br>
+            <div class="Select_TimeInterval">
+                <label for="ChooseKp">Select value of Time Interval:</label>
+                <br>
+                <div>
+                    <input type="range" id="TIntervalSlider" name="TInterval" min="0.001" max="100" step="0.001"  oninput="updateValue('TIntervalSlider', 'TIntervalValue')"/>
+                    <output id="TIntervalValue">50.001</output> [s]
+                </div> 
+            </div>  
+            <br>
             <br>
             <br>
             <div class="Button">

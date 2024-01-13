@@ -19,7 +19,7 @@ class Kettle:
     def CalculatePower(self, voltage, current):
         return voltage[-1]*current[-1]
     def CalculateThermalCapacity(self, Density, SpecificHeat):
-        Volume = 1.7 #assumption that Volume is constant 
+        Volume = 0.17 #assumption that Volume is constant 
         Mass = Density[-1]*Volume
         return Mass*SpecificHeat[-1]
     def CalculateWaterTemperature(self, TempWater, HeatIn, HeatOut, timeInterval, ThermalCapacity):

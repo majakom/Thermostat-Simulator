@@ -13,14 +13,19 @@ def flaskApp():
 
 @app.route("/GetParameters", methods=['POST', 'GET'])
 def GetParameters():
+    regulator = request.form.get("typeRegulator")
     material = request.form.get("typeMaterial")
     ambient = request.form.get("AmbientTemperature")
     temperature = request.form.get("Temperature")
-    data = [int(material), int(ambient), int(temperature)]
+    kp = request.form.get("Kp")
+    Ti = request.form.get("Ti")
+    Td = request.form.get("Td")
+    TInterval = request.form.get("TInterval")
+    data = [int(material), int(ambient), int(temperature), float(kp), float(Ti), float(Td), float(TInterval), int(regulator)]
     main.LoadJson()
     print(f"Material: {material}, Ambient: {ambient}, Temperature: {temperature}")
 
-    time, TempWater = main.Calculate(data)
+    time, TempWater, Denisty, e, HeatOut, HeatIn, HeatSum, ThermalCapacity = main.Calculate(data)
     df = pd.DataFrame({'Time [s]':time, 'Water temperature [C]':TempWater})
     fig =px.line(df, x='Time [s]', y='Water temperature [C]', title="Thermostat - PID regulator")
     

@@ -64,7 +64,7 @@ def GetDataFromFlask(data):
             newKettle = materials[2]
         case 3:
             newKettle = materials[3]
-    return newKettle, data[2], data[1]
+    return newKettle, data[2], data[1], data[3], data[4], data[5], data[6], data[7]
 
 
 
@@ -82,9 +82,8 @@ def Calculate(data):
 
     timeSimulation = 20000 #entire time for simulation
     time = [0.0] # time lapse vector
-    timeInterval = 0.1 # time interval
+    #timeInterval = 0.1 # time interval
 
-    N = int(timeSimulation/timeInterval) + 1
 
     TempMin = 50 #min temperature to achieve via kettle
     TempMax = 90 #max temperature to achieve via kettle
@@ -95,64 +94,12 @@ def Calculate(data):
 
     HeatIn = [0.0] #heat created inside kettle
     HeatOut = [0.0] #heat loss to the outside environment
+    HeatSum = [0.0] #heat created substracted by heat loss
 
     
-    Kp = 0.0001 #regulator gain
+    #Kp = 0.0001 #regulator gain
     
-    newKettle, TempWanted, TempAmb =  GetDataFromFlask(data)
-
-    if (newKettle == materials[0]):
-        if(TempWanted <= 60 and TempAmb >=29):
-            Kp = 0.000001
-            timeI = 0.0001
-            timeD = 0.000001
-        elif (TempWanted >= 80): 
-            Kp = 0.0002
-            timeI = 1
-            timeD = 3
-        else:
-            Kp = 0.0000005999 #regulator gain
-            timeI = 0.0005
-            timeD = 0.000001
-    elif (newKettle == materials[1]):
-        if(TempWanted <= 60 and TempAmb >=29):
-            Kp = 2 #regulator gain
-            timeI = 0.01
-            timeD = 4    
-        elif (TempWanted >= 80): 
-            Kp = 0.00075 #regulator gain
-            timeI = 3
-            timeD = 4    
-        else:
-            Kp = 0.00000999999999 #regulator gain
-            timeI = 0.0099
-            timeD = 4    
-    elif (newKettle == materials[2]):
-        if(TempWanted <= 60 and TempAmb >=29):
-            Kp = 1 #regulator gain
-            timeI = 0.1
-            timeD = 3
-        elif (TempWanted >= 61):
-            Kp = 0.003 #regulator gain
-            timeI = 1.5
-            timeD = 3           
-        else:
-            Kp = 0.000105 #regulator gain
-            timeI = 0.00859
-            timeD = 3
-    elif (newKettle == materials[3]):
-        if(TempWanted <= 60 and TempAmb >=29):
-            Kp = 0.7 #regulator gain
-            timeI = 0.1
-            timeD = 3
-        elif (TempWanted >= 61):
-            Kp = 0.003 #regulator gain
-            timeI = 1.5
-            timeD = 10            
-        else:
-            Kp = 0.01 #regulator gain
-            timeI = 1.5
-            timeD = 10
+    newKettle, TempWanted, TempAmb, Kp, timeI, timeD, timeInterval, regulator =  GetDataFromFlask(data)
 
     # GetAllData(TempAmbMin, TempAmbMax, TempMax, TempMin)
 
@@ -164,20 +111,26 @@ def Calculate(data):
     SpecificHeat = [0.0]
     ThermalResistance = newKettle.CalculateThermalResistance() #calculate thermal resistance
 
+    N = int(timeSimulation/timeInterval) + 1
+
     for _ in range(N):
         time.append((time[-1] + timeInterval))
         e.append((TempWanted - TempWater[-1]))
         sumE.append((sumE[-1] + e[-1]))
-        voltagePID.append(Kp*(e[-1] + (timeInterval/timeI)*sumE[-1] + (timeD/timeInterval)*(e[-1]-e[-2])))
+        if (regulator == 0):
+            voltagePID.append(Kp*(e[-1] + (timeInterval/timeI)*sumE[-1] + (timeD/timeInterval)*(e[-1]-e[-2])))
+        if (regulator == 1):
+            timeD = 0
+            voltagePID.append(Kp*(e[-1] + (timeInterval/timeI)*sumE[-1] + (timeD/timeInterval)*(e[-1]-e[-2])))
         voltage.append(max(voltageMin, min(voltageMax, voltagePID[-1])))
         current.append((currentMax - currentMin)/(voltageMax - voltageMin) * (voltage[-1] - voltageMin) + currentMin)
         power.append(newKettle.CalculatePower(voltage,current))
-
         Density.append((newKettle.CalculateWaterDensity(TempWater)))
         SpecificHeat.append(newKettle.CalculateIsochoricSpecificHeat(TempWater))
         ThermalCapacity.append(newKettle.CalculateThermalCapacity(Density, SpecificHeat))
         HeatOut.append(newKettle.CalculateHeatLoss(TempWater, TempAmb, ThermalResistance))
         HeatIn.append(newKettle.CalculateHeatProvided(power, time))
+        HeatSum.append(HeatIn[-1]-HeatOut[-1])
         TempWater.append(newKettle.CalculateWaterTemperature(TempWater, HeatIn, HeatOut, timeInterval, ThermalCapacity))
 
     #fig = plt.figure()
@@ -194,7 +147,7 @@ def Calculate(data):
     #fig =px.line(df, x='Time [s]', y='Water temperature [C]', title="Testing")
     #fig.show()
 
-    return time, TempWater
+    return time, TempWater, Density, e, HeatOut, HeatIn, HeatSum, ThermalCapacity
 
 
 
