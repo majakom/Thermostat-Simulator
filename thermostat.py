@@ -16,9 +16,10 @@ def GetParameters():
     material = request.form.get("typeMaterial")
     ambient = request.form.get("AmbientTemperature")
     temperature = request.form.get("Temperature")
-    data = [int(material), int(ambient), int(temperature)]
+    regulator_gain = request.form.get("regulatorGain")
+    data = [int(material), int(ambient), int(temperature), float(regulator_gain)]
     main.LoadJson()
-    print(f"Material: {material}, Ambient: {ambient}, Temperature: {temperature}")
+    print(f"Material: {material}, Ambient: {ambient}, Temperature: {temperature}, regulator_gain: {regulator_gain}")
 
     time, TempWater = main.Calculate(data)
     df = pd.DataFrame({'Time [s]':time, 'Water temperature [C]':TempWater})

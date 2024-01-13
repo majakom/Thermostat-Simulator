@@ -64,7 +64,7 @@ def GetDataFromFlask(data):
             newKettle = materials[2]
         case 3:
             newKettle = materials[3]
-    return newKettle, data[2], data[1]
+    return newKettle, data[2], data[1], data[3]
 
 
 
@@ -97,60 +97,60 @@ def Calculate(data):
     HeatOut = [0.0] #heat loss to the outside environment
 
     
-    Kp = 0.0001 #regulator gain
+    #Kp = 0.0001 #regulator gain
     
-    newKettle, TempWanted, TempAmb =  GetDataFromFlask(data)
+    newKettle, TempWanted, TempAmb, Kp =  GetDataFromFlask(data)
 
     if (newKettle == materials[0]):
         if(TempWanted <= 60 and TempAmb >=29):
-            Kp = 0.000001
+            #Kp = 0.000001
             timeI = 0.0001
             timeD = 0.000001
         elif (TempWanted >= 80): 
-            Kp = 0.0002
+            #Kp = 0.0002
             timeI = 1
             timeD = 3
         else:
-            Kp = 0.0000005999 #regulator gain
+            #Kp = 0.0000005999 #regulator gain
             timeI = 0.0005
             timeD = 0.000001
     elif (newKettle == materials[1]):
         if(TempWanted <= 60 and TempAmb >=29):
-            Kp = 2 #regulator gain
+            #Kp = 2 #regulator gain
             timeI = 0.01
             timeD = 4    
         elif (TempWanted >= 80): 
-            Kp = 0.00075 #regulator gain
+            #Kp = 0.00075 #regulator gain
             timeI = 3
             timeD = 4    
         else:
-            Kp = 0.00000999999999 #regulator gain
+            #Kp = 0.00000999999999 #regulator gain
             timeI = 0.0099
             timeD = 4    
     elif (newKettle == materials[2]):
         if(TempWanted <= 60 and TempAmb >=29):
-            Kp = 1 #regulator gain
+            #Kp = 1 #regulator gain
             timeI = 0.1
             timeD = 3
         elif (TempWanted >= 61):
-            Kp = 0.003 #regulator gain
+            #Kp = 0.003 #regulator gain
             timeI = 1.5
             timeD = 3           
         else:
-            Kp = 0.000105 #regulator gain
+            #Kp = 0.000105 #regulator gain
             timeI = 0.00859
             timeD = 3
     elif (newKettle == materials[3]):
         if(TempWanted <= 60 and TempAmb >=29):
-            Kp = 0.7 #regulator gain
+            #Kp = 0.7 #regulator gain
             timeI = 0.1
             timeD = 3
         elif (TempWanted >= 61):
-            Kp = 0.003 #regulator gain
+            #Kp = 0.003 #regulator gain
             timeI = 1.5
             timeD = 10            
         else:
-            Kp = 0.01 #regulator gain
+            #Kp = 0.01 #regulator gain
             timeI = 1.5
             timeD = 10
 

@@ -53,6 +53,16 @@
             </div>    
             <br>
             <br>
+            <div class="Select_Regulator_Gain">
+                <label for="ChooseRegulatorGain">Select regulator gain:</label>
+                <br>
+                <div>
+                    <input type="range" id="regulatorSlider" name="regulatorGain" min="0.00001" max="2" step="0.00001"  oninput="updateValue('regulatorSlider', 'regulatorValue')"/>
+                    <output id="regulatorValue">0.0001</output>
+                </div> 
+            </div>    
+            <br>
+            <br>
             <div class="Button">
                 <form action="/GetParameters" method="post">
                     <button type="submit">Create charts</button>                    
@@ -83,6 +93,6 @@
             const selectedOption = selectElement.options[selectElement.selectedIndex];
             output.textContent = selectedOption.text;
         }
-        
+
     </script>
 </html>
