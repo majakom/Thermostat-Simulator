@@ -80,7 +80,7 @@ def Calculate(data):
 
     power = [0.0]
 
-    timeSimulation = 20000 #entire time for simulation
+    timeSimulation = 8000 #entire time for simulation
     time = [0.0] # time lapse vector
     #timeInterval = 0.1 # time interval
 
@@ -107,12 +107,12 @@ def Calculate(data):
     e = [(TempWanted - TempWater[0])] # tilt in the beginning
     sumE = [e[0]] #sum of tilts
 
-    ThermalCapacity = [0.0]
+    ThermalCapacity = []
     SpecificHeat = [0.0]
     ThermalResistance = newKettle.CalculateThermalResistance() #calculate thermal resistance
 
     N = int(timeSimulation/timeInterval) + 1
-
+    Density.append((newKettle.CalculateWaterDensity(TempWater)))
     for _ in range(N):
         time.append((time[-1] + timeInterval))
         e.append((TempWanted - TempWater[-1]))
@@ -132,7 +132,7 @@ def Calculate(data):
         HeatIn.append(newKettle.CalculateHeatProvided(power, time))
         HeatSum.append(HeatIn[-1]-HeatOut[-1])
         TempWater.append(newKettle.CalculateWaterTemperature(TempWater, HeatIn, HeatOut, timeInterval, ThermalCapacity))
-
+    ThermalCapacity.append(newKettle.CalculateThermalCapacity(Density, SpecificHeat))
     #fig = plt.figure()
     #gs = fig.add_gridspec(1, hspace=0.5)
     #axs = gs.subplots()

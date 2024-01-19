@@ -69,8 +69,8 @@
                 <label for="ChooseRegulatorGain">Select regulator gain:</label>
                 <br>
                 <div>
-                    <input type="range" id="regulatorSlider" name="regulatorGain" min="0.00001" max="2" step="0.00001"  oninput="updateValue('regulatorSlider', 'regulatorValue')"/>
-                    <output id="regulatorValue">0.0001</output>
+                    <input type="range" id="regulatorSlider" name="regulatorGain" min="0.0001" max="2" step="0.00001"  oninput="updateValue('regulatorSlider', 'regulatorValue')"/>
+                    <output id="regulatorValue">1</output>
                 </div> 
             </div>    
             <br>
@@ -79,8 +79,8 @@
                 <label for="ChooseTi">Select value of Ti:</label>
                 <br>
                 <div>
-                    <input type="range" id="TiSlider" name="Ti" min="0.1" max="100" step="0.1"  oninput="updateValue('TiSlider', 'TiValue')"/>
-                    <output id="TiValue">50.1</output> [s]
+                    <input type="range" id="TiSlider" name="Ti" min="0.1" max="5" step="0.1"  oninput="updateValue('TiSlider', 'TiValue')"/>
+                    <output id="TiValue">2.5</output> [s]
                 </div> 
             </div>  
             <br>
@@ -89,8 +89,8 @@
                 <label for="ChooseTd">Select value of Td:</label>
                 <br>
                 <div>
-                    <input type="range" id="TdSlider" name="Td" min="0.1" max="100" step="0.1"  oninput="updateValue('TdSlider', 'TdValue')"/>
-                    <output id="TdValue">50.1</output> [s]
+                    <input type="range" id="TdSlider" name="Td" min="0.1" max="5 step="0.1"  oninput="updateValue('TdSlider', 'TdValue')"/>
+                    <output id="TdValue">2.5</output> [s]
                 </div> 
             </div>  
             <br>
@@ -99,8 +99,8 @@
                 <label for="ChooseKp">Select value of Time Interval:</label>
                 <br>
                 <div>
-                    <input type="range" id="TIntervalSlider" name="TInterval" min="0.001" max="100" step="0.001"  oninput="updateValue('TIntervalSlider', 'TIntervalValue')"/>
-                    <output id="TIntervalValue">50.001</output> [s]
+                    <input type="range" id="TIntervalSlider" name="TInterval" min="0.1" max="100" step="0.01"  oninput="updateValue('TIntervalSlider', 'TIntervalValue')"/>
+                    <output id="TIntervalValue">50</output> [s]
                 </div> 
             </div>  
             <br>
@@ -120,11 +120,33 @@
         <div style="width:100%">
             <h3><div id='chart' class='graph'></div></h3>
         </div>
+        <div style="width:100%">
+            <h3><div id='chart2' class='graph'></div></h3>
+            <h3><div id='chart3' class='graph'></div></h3>
+            <h3><div id='chart4' class='graph'></div></h3>
+            <h3><div id='chart5' class='graph'></div></h3>
+            <h3><div id='chart6' class='graph'></div></h3>
+            <h3><div id='chart7' class='graph'></div></h3>
+        </div>
     </body>
     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
     <script type='text/javascript'>
       var graphs = {{graphJSON | safe}};
       Plotly.plot('chart',graphs,{});
+    </script>
+    <script type='text/javascript'>
+        var graphs = {{graphJSON2 | safe}};
+        Plotly.plot('chart2',graphs,{});
+        var graphs = {{graphJSON3 | safe}};
+        Plotly.plot('chart3', graphs, {});
+        var graphs = {{graphJSON4 | safe}};
+        Plotly.plot('chart4', graphs, {});
+        var graphs = {{graphJSON5 | safe}};
+        Plotly.plot('chart5', graphs, {});
+        var graphs = {{graphJSON6 | safe}};
+        Plotly.plot('chart6', graphs, {});
+        var graphs = {{graphJSON7 | safe}};
+        Plotly.plot('chart7', graphs, {});
     </script>
  
     <script>
