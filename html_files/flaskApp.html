@@ -118,15 +118,10 @@
         </h2>
         </div> 
         <div style="width:100%">
-            <h3><div id='chart' class='graph'></div></h3>
-        </div>
-        <div style="width:100%">
-            <h3><div id='chart2' class='graph'></div></h3>
-            <h3><div id='chart3' class='graph'></div></h3>
-            <h3><div id='chart4' class='graph'></div></h3>
-            <h3><div id='chart5' class='graph'></div></h3>
-            <h3><div id='chart6' class='graph'></div></h3>
-            <h3><div id='chart7' class='graph'></div></h3>
+            <h3><div id='chart' class='graph'></div>
+            <div id='chart2' class='graph'></div>
+            <div id='chart4' class='graph'></div>
+            <div id='chart7' class='graph'></div></h3>
         </div>
     </body>
     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
@@ -137,14 +132,8 @@
     <script type='text/javascript'>
         var graphs = {{graphJSON2 | safe}};
         Plotly.plot('chart2',graphs,{});
-        var graphs = {{graphJSON3 | safe}};
-        Plotly.plot('chart3', graphs, {});
         var graphs = {{graphJSON4 | safe}};
         Plotly.plot('chart4', graphs, {});
-        var graphs = {{graphJSON5 | safe}};
-        Plotly.plot('chart5', graphs, {});
-        var graphs = {{graphJSON6 | safe}};
-        Plotly.plot('chart6', graphs, {});
         var graphs = {{graphJSON7 | safe}};
         Plotly.plot('chart7', graphs, {});
     </script>
