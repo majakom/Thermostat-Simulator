@@ -16,3 +16,7 @@ Repo consists of: <br /><br />
 Site created using flask.
 
 The command-line prototype involved using matplotlib library.
+
+## Documentation
+
+* [Here] (documentation.pdf) You can find documentation which focuses mostly on formulas used for calculations in the simulator. 
