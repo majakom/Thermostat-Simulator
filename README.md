@@ -19,4 +19,4 @@ The command-line prototype involved using matplotlib library.
 
 ## Documentation
 
-* [Here] (documentation.pdf) You can find documentation which focuses mostly on formulas used for calculations in the simulator. 
+* [Here](documentation.pdf) You can find documentation which focuses mostly on formulas used for calculations in the simulator. 
