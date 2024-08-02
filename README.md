@@ -4,7 +4,7 @@ Project made for Basics Of Control Engineering laboratories in Poznań Universit
 
 ## General Information
 
-Repo consists of:
+Repo consists of: <br />
     - material.json; adjustable json file with types of materials and their characteristics concerning thermodynamics therms <br />
     - Kettle.py; python file with a class containing physical and mathematical formulas necessary for visualizations in the form of graphs <br />
     - thermostat.py; python file - introduces flask <br />
