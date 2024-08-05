@@ -1,6 +1,20 @@
 # Thermostat Simulator
 
-Project made for Basics Of Control Engineering laboratories at Poznań University of Technology.
+Project made for Basics Of Control Engineering laboratories at Poznań University of Technology. <br />
+Site was made for simulating thermostat behaviour considering different settings.
+
+## Settings
+Simulation settings include: <br />
+
+   * ambient temperature <br />
+   * water (inside the thermostat) temperature <br />
+   * fabric of which such thermostat is made of <br />
+   * type of regulator (although project mostly focuses on PID regulator) <br />
+   * regulator gain
+   * Time interval of making calculations
+   * Ti
+   * Td
+
 
 ## General Information
 
