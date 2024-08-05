@@ -1,7 +1,7 @@
 # Thermostat Simulator
 
 Project made for Basics Of Control Engineering laboratories at Poznań University of Technology. <br />
-Site was made for simulating thermostat behaviour considering different settings.
+Web app was made for simulating thermostat behaviour considering different settings.
 
 The simulated thermostat uses a heater to make water gain the desired by the user temperature,
 and then maintain it. The simulator assumes that the volume of water to be heated is constant and equal to
@@ -35,7 +35,7 @@ Repo consists of: <br /><br />
    * [CSS file](static) - visual side of the website <br /> <br />
    * [HTML file](html_files) - allows user to enter needed data or choose settings for the simulation about to be run; displays graphs that depict the process of the simulation <br /> <br />
 
-Site created using flask.
+Web app created using flask.
 
 The command-line prototype involved using matplotlib library.
 
