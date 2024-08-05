@@ -1,6 +1,6 @@
 # Thermostat Simulator
 
-Project made for Basics Of Control Engineering laboratories in Poznań University of Technology.
+Project made for Basics Of Control Engineering laboratories at Poznań University of Technology.
 
 ## General Information
 
